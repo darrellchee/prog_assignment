@@ -45,6 +45,7 @@ class Order {
     private String pickUpAddress;
     private String deliveryAddress;
     private Tracking status;
+    private int price;
 
     Order(int orderNumber, int trackingNumber, String pickUpAddress, String deliveryAddress,Tracking status) {
         this.orderNumber = orderNumber;
@@ -92,6 +93,14 @@ class Order {
 
     public void setStatus(Tracking status) {
         this.status = status;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
 }
@@ -204,11 +213,11 @@ abstract class Customer {
     protected String email;
     protected String phoneNumber;
     protected String address;
+    protected String password;
     protected ArrayList<Integer> orderNumbers;
 
     Customer(String name, String email, String phoneNumber, String address) {
-        this.customerID = "CUST" + nextID;
-        nextID++;
+        this.customerID = "CUST " + name + email;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -237,12 +246,16 @@ abstract class Customer {
         return address;
     }
 
-    public ArrayList<Integer> getOrderNumbers() {
-        return orderNumbers;
+    public String getPassword(){
+        return password;
     }
 
-    public String getRegistrationDate() {
-        return registrationDate;
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public ArrayList<Integer> getOrderNumbers() {
+        return orderNumbers;
     }
 
     public int getTotalOrders() {
@@ -267,8 +280,63 @@ abstract class Customer {
     }
 }
 
-public class Individual extends Customer {
-    String 
+class Individual extends Customer {
+    protected String customerID;
+    protected String name;
+    protected String email;
+    protected String phoneNumber;
+    protected String address;
+    protected ArrayList<Integer> orderNumbers;
+    
+    Individual(String name, String email, String phoneNumber, String address) {
+        super(name, email, phoneNumber, address);
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ArrayList<Integer> getOrderNumbers() {
+        return orderNumbers;
+    }
+
+    public int getTotalOrders() {
+        return orderNumbers.size();
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 }
 
 enum Tracking {
@@ -291,6 +359,8 @@ enum ServiceType {
 }
 
 class Menu {
+    ArrayList<Customer> customers;
+    Individual individual;
 
     public void pickUserType() {
         System.out.println("Welcome to the postal service");
@@ -322,18 +392,26 @@ class Menu {
         System.out.println("(2) To register");
         int userInput = In.nextInt();
         if(userInput == 1){
-
+            while (true) {
+                System.out.println("Please input your associated email");
+                String customerEmail = In.nextLine();     
+                System.out.println("Please input your associated password");
+                String password = In.nextLine();
+                for(Customer customer : customers){
+                    if(customer.getEmail().equals(customerEmail) && customer.getPassword().equals(password)){
+                        individual = (Individual) customer;
+                        customerMenu();
+                    }else{
+                        System.out.println("Email or password incorrect, please try again");
+                    }
+                }
+            }
         } else if (userInput == 2){
             registerCustomer();
         } else {
             System.out.println("Please input either 1 or 2");
         }
-        System.out.println("Please input your associated email");
-        while (true) {
-            String customerID = In.nextLine();     
-        }
-        System.out.println("Please input your associated password");
-        String password = In.nextLine();
+
     }
 
     public void registerCustomer() {
@@ -352,14 +430,18 @@ class Menu {
         System.out.println("Hello there " + individual.getName());
         System.out.println("(1) To orders menu");
         System.out.println("(2) To profile menu");
+        System.out.println("(3) To main menu");
         while (true) {
             try {
                 int userInput = In.nextInt();
                 if (userInput == 1) {
-
+                    customerOrdersMenu();
                 } else if (userInput == 2) {
-
-                } else {
+                    customerProfileMenu();
+                } else if(userInput == 3){
+                    pickUserType();
+                }
+                else {
                     System.out.println("Please input either 1 or 2");
                 }
             } catch (Exception e) {
@@ -373,7 +455,6 @@ class Menu {
     public void customerOrdersMenu() {
         System.out.println("(1) To place order");
         System.out.println("(2) To track order");
-        System.out.println("(3) To cancel order");
         while (true) {
             try {
                 int userInput = In.nextInt();
@@ -381,13 +462,47 @@ class Menu {
                     getOrderNumbers();
                 } else if (userInput == 2) {
 
-                } else if (userInput == 3) {
-
                 } else {
                     System.out.println("Please input either 1, 2, or 3");
                 }
             } catch (Exception e) {
                 System.out.println("Please input either 1, 2, or 3");
+            }
+        }
+    }
+
+    public void customerProfileMenu() {
+        System.out.println("(1) To view profile");
+        System.out.println("(2) To edit profile");
+        System.out.println("(3) To main menu");
+        while (true) {
+            try {
+                int userInput = In.nextInt();
+                if (userInput == 1) {
+                    System.out.println("Name: " + individual.getName());
+                    System.out.println("Email: " + individual.getEmail());
+                    System.out.println("Phone Number: " + individual.getPhoneNumber());
+                    System.out.println("Address: " + individual.getAddress());
+                } else if (userInput == 2) {
+                    System.out.println("Please input your name");
+                    String name = In.nextLine();
+                    System.out.println("Please input your email");
+                    String email = In.nextLine();
+                    System.out.println("Please input your phone number");
+                    String phoneNumber = In.nextLine();
+                    System.out.println("Please input your address");
+                    String address = In.nextLine();
+                    individual.setName(name);
+                    individual.setEmail(email);
+                    individual.setPhoneNumber(phoneNumber);
+                    individual.setAddress(address);
+                } else if (userInput == 3) {
+                    customerMenu();
+                }else {
+                    System.out.println("Please input either 1 or 2");
+                }
+            } catch (Exception e) {
+                System.out.println("Please input either 1 or 2");
             }
         }
     }
