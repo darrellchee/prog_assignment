@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +9,7 @@ public class postalService {
     
     ArrayList<Customer> getCustomers(){
         customers = new ArrayList<Customer>();
+        return customers;
     }
 
     void setCustomers(ArrayList<Customer> customers){
@@ -24,8 +24,9 @@ public class postalService {
         customers = new ArrayList<Customer>();
     }
     public static void main(String[] args) {
-
         ArrayList<Vehicle> vehicles;
+        Menu menu = new Menu();
+        menu.pickUserType();
 
     }
 
@@ -459,9 +460,9 @@ class Menu {
             try {
                 int userInput = In.nextInt();
                 if (userInput == 1) {
-                    getOrderNumbers();
+                    ArrayList<Integer> orders = individual.getOrderNumbers();
                 } else if (userInput == 2) {
-
+                    //pass
                 } else {
                     System.out.println("Please input either 1, 2, or 3");
                 }
