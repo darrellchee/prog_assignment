@@ -6,11 +6,30 @@ import java.util.*;
 
 public class postalService {
 
+    private ArrayList<Customer> customers;
+    
+    ArrayList<Customer> getCustomers(){
+        customers = new ArrayList<Customer>();
+    }
+
+    void setCustomers(ArrayList<Customer> customers){
+        this.customers = customers;
+    }
+
+    void addCustomer(Customer customer){
+        customers.add(customer);
+    }
+    
+    postalService(){
+        customers = new ArrayList<Customer>();
+    }
     public static void main(String[] args) {
 
         ArrayList<Vehicle> vehicles;
 
     }
+
+
 }
 
 // jake
@@ -26,6 +45,14 @@ class Order {
     private String pickUpAddress;
     private String deliveryAddress;
     private Tracking status;
+
+    Order(int orderNumber, int trackingNumber, String pickUpAddress, String deliveryAddress,Tracking status) {
+        this.orderNumber = orderNumber;
+        this.trackingNumber = trackingNumber;
+        this.pickUpAddress = pickUpAddress;
+        this.deliveryAddress = deliveryAddress;
+        this.status = status;
+    }
 
     public int getOrderNumber() {
         return orderNumber;
@@ -77,6 +104,16 @@ class Vehicle {
     private double currentCapacity;
     private Depot currentDepotLocation;
     private Depot nextDepotLocation;
+
+    Vehicle(HashMap<Integer, String> orders, double estimatedDeparture, double maximumCapacity,
+        double currentCapacity, Depot currentDepotLocation, Depot nextDepotLocation) {
+        this.orders = orders;
+        this.estimatedDeparture = estimatedDeparture;
+        this.maximumCapacity = maximumCapacity;
+        this.currentCapacity = currentCapacity;
+        this.currentDepotLocation = currentDepotLocation;
+        this.nextDepotLocation = nextDepotLocation;
+    }
 
     public HashMap<Integer, String> getOrders() {
         return this.orders;
@@ -132,6 +169,11 @@ class Depot {
     private ArrayList<Vehicle> vehicles;
     private HashMap<Order, Vehicle> orders;
 
+    Depot(ArrayList<Vehicle> vehicles, HashMap<Order, Vehicle> orders) {
+        this.vehicles = vehicles;
+        this.orders = orders;
+    }
+
     public ArrayList<Vehicle> getVehicles() {
         return vehicles;
     }
@@ -164,7 +206,7 @@ abstract class Customer {
     protected String address;
     protected ArrayList<Integer> orderNumbers;
 
-    public Customer(String name, String email, String phoneNumber, String address) {
+    Customer(String name, String email, String phoneNumber, String address) {
         this.customerID = "CUST" + nextID;
         nextID++;
         this.name = name;
@@ -275,6 +317,37 @@ class Menu {
         }
     }
 
+    public void loginCustomer() {
+        System.out.println("(1) To login");
+        System.out.println("(2) To register");
+        int userInput = In.nextInt();
+        if(userInput == 1){
+
+        } else if (userInput == 2){
+            registerCustomer();
+        } else {
+            System.out.println("Please input either 1 or 2");
+        }
+        System.out.println("Please input your associated email");
+        while (true) {
+            String customerID = In.nextLine();     
+        }
+        System.out.println("Please input your associated password");
+        String password = In.nextLine();
+    }
+
+    public void registerCustomer() {
+        System.out.println("Please input your name");
+        String name = In.nextLine();
+        System.out.println("Please input your email");
+        String email = In.nextLine();
+        System.out.println("Please input your phone number");
+        String phoneNumber = In.nextLine();
+        System.out.println("Please input your address");
+        String address = In.nextLine();
+        
+    }
+
     public void customerMenu() {
         System.out.println("Hello there " + individual.getName());
         System.out.println("(1) To orders menu");
@@ -294,7 +367,6 @@ class Menu {
             }
         }
 
-        // holwssfhjkjh
 
     }
 
