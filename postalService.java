@@ -4,26 +4,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.*;
 
-
 public class postalService {
 
     public static void main(String[] args) {
-    
-    ArrayList <Vehicle> vehicles;
 
-
+        ArrayList<Vehicle> vehicles;
 
     }
 }
 
-//jake 
-//enums, postal service
+// jake
+// enums, postal service
 
-//ihuhju
-//darrell
-//order, vehicle, depot
+// ihuhju
+// darrell
+// order, vehicle, depot
 
-class Order{
+class Order {
     private int orderNumber;
     private int trackingNumber;
     private String pickUpAddress;
@@ -31,7 +28,7 @@ class Order{
     private Tracking status;
 
     public int getOrderNumber() {
-    return orderNumber;
+        return orderNumber;
     }
 
     public void setOrderNumber(int orderNumber) {
@@ -70,18 +67,17 @@ class Order{
         this.status = status;
     }
 
-
 }
 
-class Vehicle{
-    //order number, adress
+class Vehicle {
+    // order number, adress
     private HashMap<Integer, String> orders;
     private double estimatedDeparture;
     private double maximumCapacity;
     private double currentCapacity;
     private Depot currentDepotLocation;
     private Depot nextDepotLocation;
-    
+
     public HashMap<Integer, String> getOrders() {
         return this.orders;
     }
@@ -132,7 +128,7 @@ class Vehicle{
 
 }
 
-class Depot{
+class Depot {
     private ArrayList<Vehicle> vehicles;
     private HashMap<Order, Vehicle> orders;
 
@@ -152,16 +148,14 @@ class Depot{
         this.orders = orders;
     }
 
-    public void addOrders(Order order, Vehicle vehicle){
+    public void addOrders(Order order, Vehicle vehicle) {
         orders.put(order, vehicle);
     }
 
 }
 
-
-
-//louis
-//customer, vendor, individual customer, 
+// louis
+// customer, vendor, individual customer,
 abstract class Customer {
     protected String customerID;
     protected String name;
@@ -177,65 +171,63 @@ abstract class Customer {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.orderNumbers = new ArrayList<Integer>(); 
+        this.orderNumbers = new ArrayList<Integer>();
     }
 
     // Getters
     public String getCustomerID() {
         return customerID;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
+
     public String getAddress() {
         return address;
     }
-    
+
     public ArrayList<Integer> getOrderNumbers() {
         return orderNumbers;
     }
-    
+
     public String getRegistrationDate() {
         return registrationDate;
     }
-    
+
     public int getTotalOrders() {
         return orderNumbers.size();
     }
-    
+
     // Setters
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
 }
+
 public class Individual extends Customer {
     String 
 }
-
-
-
 
 enum Tracking {
     PENDING,
@@ -256,83 +248,83 @@ enum ServiceType {
     SAME_DAY,
 }
 
-class Menu{
+class Menu {
 
-    public void pickUserType(){
+    public void pickUserType() {
         System.out.println("Welcome to the postal service");
         System.out.println("Pick what best defines you");
         System.out.println("(1) Individual Customer");
         System.out.println("(2) Vendor");
         System.out.println("(3) Admin");
-        while(true){
-            try{
+        while (true) {
+            try {
                 int userInput = In.nextInt();
-                if(userInput == 1){
+                if (userInput == 1) {
                     customerMenu();
-                }else if(userInput == 2){
+                } else if (userInput == 2) {
                     vendorMenu();
-                }else if(userInput == 3){
+                } else if (userInput == 3) {
                     admin();
-                }else{
+                } else {
                     System.out.println("Please input either 1, 2, 3");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Please input either 1, 2, 3");
-                
-            }
-    }
-}
 
-    public void customerMenu(){
+            }
+        }
+    }
+
+    public void customerMenu() {
         System.out.println("Hello there " + individual.getName());
         System.out.println("(1) To orders menu");
         System.out.println("(2) To profile menu");
         while (true) {
             try {
                 int userInput = In.nextInt();
-                if(userInput == 1){
-                    
-                }else if(userInput == 2){
+                if (userInput == 1) {
 
-                }else{
+                } else if (userInput == 2) {
+
+                } else {
                     System.out.println("Please input either 1 or 2");
                 }
             } catch (Exception e) {
                 System.out.println("Please input either 1 or 2");
-            }            
+            }
         }
 
-        
-        
+        // holwssfhjkjh
+
     }
 
-    public void customerOrdersMenu(){
+    public void customerOrdersMenu() {
         System.out.println("(1) To place order");
         System.out.println("(2) To track order");
         System.out.println("(3) To cancel order");
         while (true) {
             try {
                 int userInput = In.nextInt();
-                if(userInput == 1){
+                if (userInput == 1) {
                     getOrderNumbers();
-                }else if(userInput == 2){
+                } else if (userInput == 2) {
 
-                }else if(userInput == 3){
+                } else if (userInput == 3) {
 
-                }else{
+                } else {
                     System.out.println("Please input either 1, 2, or 3");
                 }
             } catch (Exception e) {
                 System.out.println("Please input either 1, 2, or 3");
-            }            
+            }
         }
     }
 
-    public void vendorMenu(){
+    public void vendorMenu() {
 
     }
 
-    public void admin(){
+    public void admin() {
 
     }
 
