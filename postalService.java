@@ -1,34 +1,339 @@
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.*;
+
+
 public class postalService {
 
     public static void main(String[] args) {
-        
+    
+    ArrayList <Vehicle> vehicles;
+
+
+
     }
 }
 
-class user{
+//jake 
+//enums, postal service
+
+//ihuhju
+//darrell
+//order, vehicle, depot
+
+class Order{
+    private int orderNumber;
+    private int trackingNumber;
+    private String pickUpAddress;
+    private String deliveryAddress;
+    private Tracking status;
+
+    public int getOrderNumber() {
+    return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public int getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(int trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
+
+    public String getPickUpAddress() {
+        return pickUpAddress;
+    }
+
+    public void setPickUpAddress(String pickUpAddress) {
+        this.pickUpAddress = pickUpAddress;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public Tracking getStatus() {
+        return status;
+    }
+
+    public void setStatus(Tracking status) {
+        this.status = status;
+    }
+
 
 }
 
-class service{
+class Vehicle{
+    //order number, adress
+    private HashMap<Integer, String> orders;
+    private double estimatedDeparture;
+    private double maximumCapacity;
+    private double currentCapacity;
+    private Depot currentDepotLocation;
+    private Depot nextDepotLocation;
+    
+    public HashMap<Integer, String> getOrders() {
+        return this.orders;
+    }
+
+    public void setOrders(HashMap<Integer, String> order) {
+        this.orders = order;
+    }
+
+    public double getEstimatedDeparture() {
+        return estimatedDeparture;
+    }
+
+    public void setEstimatedDeparture(double estimatedDeparture) {
+        this.estimatedDeparture = estimatedDeparture;
+    }
+
+    public double getMaximumCapacity() {
+        return maximumCapacity;
+    }
+
+    public void setMaximumCapacity(double maximumCapacity) {
+        this.maximumCapacity = maximumCapacity;
+    }
+
+    public double getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    public void setCurrentCapacity(double currentCapacity) {
+        this.currentCapacity = currentCapacity;
+    }
+
+    public Depot getCurrentDepotLocation() {
+        return currentDepotLocation;
+    }
+
+    public void setCurrentDepotLocation(Depot currentDepotLocation) {
+        this.currentDepotLocation = currentDepotLocation;
+    }
+
+    public Depot getNextDepotLocation() {
+        return nextDepotLocation;
+    }
+
+    public void setNextDepotLocation(Depot nextDepotLocation) {
+        this.nextDepotLocation = nextDepotLocation;
+    }
 
 }
 
-class commercialService extends service{
+class Depot{
+    private ArrayList<Vehicle> vehicles;
+    private HashMap<Order, Vehicle> orders;
 
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ArrayList<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public HashMap<Order, Vehicle> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(HashMap<Order, Vehicle> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrders(Order order, Vehicle vehicle){
+        orders.put(order, vehicle);
+    }
 
 }
 
-enum serviceType{
-    EXPRESS,
-    STANDARD,
-    PRIORITY
 
+
+//louis
+//customer, vendor, individual customer, 
+abstract class Customer {
+    protected String customerID;
+    protected String name;
+    protected String email;
+    protected String phoneNumber;
+    protected String address;
+    protected ArrayList<Integer> orderNumbers;
+
+    public Customer(String name, String email, String phoneNumber, String address) {
+        this.customerID = "CUST" + nextID;
+        nextID++;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.orderNumbers = new ArrayList<Integer>(); 
+    }
+
+    // Getters
+    public String getCustomerID() {
+        return customerID;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public ArrayList<Integer> getOrderNumbers() {
+        return orderNumbers;
+    }
+    
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+    
+    public int getTotalOrders() {
+        return orderNumbers.size();
+    }
+    
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+}
+public class Individual extends Customer {
+    String 
+}
+
+
+
+
+enum Tracking {
+    PENDING,
+    IN_TRANSIT,
+    DELIVERED,
 
 }
 
-enum packageType{
+enum PackageType {
     SMALL,
     MEDIUM,
-    LARGE
+    LARGE,
+}
+
+enum ServiceType {
+    STANDARD,
+    EXPRESS,
+    SAME_DAY,
+}
+
+class Menu{
+
+    public void pickUserType(){
+        System.out.println("Welcome to the postal service");
+        System.out.println("Pick what best defines you");
+        System.out.println("(1) Individual Customer");
+        System.out.println("(2) Vendor");
+        System.out.println("(3) Admin");
+        while(true){
+            try{
+                int userInput = In.nextInt();
+                if(userInput == 1){
+                    customerMenu();
+                }else if(userInput == 2){
+                    vendorMenu();
+                }else if(userInput == 3){
+                    admin();
+                }else{
+                    System.out.println("Please input either 1, 2, 3");
+                }
+            }catch (Exception e){
+                System.out.println("Please input either 1, 2, 3");
+                
+            }
+    }
+}
+
+    public void customerMenu(){
+        System.out.println("Hello there " + individual.getName());
+        System.out.println("(1) To orders menu");
+        System.out.println("(2) To profile menu");
+        while (true) {
+            try {
+                int userInput = In.nextInt();
+                if(userInput == 1){
+                    
+                }else if(userInput == 2){
+
+                }else{
+                    System.out.println("Please input either 1 or 2");
+                }
+            } catch (Exception e) {
+                System.out.println("Please input either 1 or 2");
+            }            
+        }
+
+        
+        
+    }
+
+    public void customerOrdersMenu(){
+        System.out.println("(1) To place order");
+        System.out.println("(2) To track order");
+        System.out.println("(3) To cancel order");
+        while (true) {
+            try {
+                int userInput = In.nextInt();
+                if(userInput == 1){
+                    getOrderNumbers();
+                }else if(userInput == 2){
+
+                }else if(userInput == 3){
+
+                }else{
+                    System.out.println("Please input either 1, 2, or 3");
+                }
+            } catch (Exception e) {
+                System.out.println("Please input either 1, 2, or 3");
+            }            
+        }
+    }
+
+    public void vendorMenu(){
+
+    }
+
+    public void admin(){
+
+    }
 
 }
